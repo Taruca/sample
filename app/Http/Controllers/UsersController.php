@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
@@ -36,6 +37,7 @@ class UsersController extends Controller
             'password' => $request->password,
         ]);
 
+        Auth::login($user);
         session()->flash('success', '欢迎，您将在这里开始一段新的旅程');
         return redirect()->route('users.show', [$user]);
     }
